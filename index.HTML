@@ -3,176 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome To My World - DEFAULT PAGE</title>
-    
-    <!-- Link to the PT Serif font from Google Fonts -->
+    <title>TITLE OF WEBPAGE</title>
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
-    
     <style>
-        /* Global styling for the entire page */
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        /* General styles */
         body {
-            /* Set the font to PT Serif */
-            font-family: 'PT Serif', serif;
-            /* Remove any default margin or padding */
             margin: 0;
             padding: 0;
-            /* Set background color to black */
             background-color: black;
-            /* Text color will be white */
             color: white;
-        }
-
-        /* Container for the Matrix background effect */
-        .matrix-bg {
-            /* Positioning to cover the whole screen */
+            font-family: 'PT Serif', serif;
             position: relative;
-            height: 100vh; /* 100% of the viewport height */
-            width: 100%; /* Full width of the screen */
-            overflow: hidden; /* Hide overflow to keep effect inside */
-            background: black; /* Black background for Matrix */
+            overflow: auto;
         }
 
-        /* Canvas used for drawing Matrix effect */
-        canvas {
-            /* Absolute positioning to cover the whole screen */
-            position: absolute;
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        input[type="password"] {
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        /* Additional sections styles */
+
+        /* Matrix effect canvas */
+        #matrix {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            z-index: -1; /* Place behind all other content */
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
-        /* Styling for the header */
+        /* Content container */
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .threat-map {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: left;
+        }
+        /* Header styles */
         header {
-            /* Center the header text */
             text-align: center;
-            padding: 20px;
-            /* Semi-transparent black background */
-            background-color: rgba(0, 0, 0, 0.7);
-            /* Add a green border below the header */
-            border-bottom: 2px solid green;
+            padding-bottom: 20px;
         }
 
-        /* Styling for the header text */
-        header h1 {
-            color: green; /* Green text */
-            font-size: 2.5em; /* Make the font size larger */
-            margin: 0; /* Remove margin */
+        /* Animation for rotating the h1 header */
+        h1 {
+            animation: spin 5s linear infinite;
         }
 
-        /* Main content section styling */
-        main {
-            padding: 20px;
-            text-align: center; /* Center the content inside the main area */
-        }
-
-        /* Section inside the main content */
-        main #content-section {
-            /* Light transparent white background with green border */
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid green;
-            border-radius: 10px; /* Rounded corners */
-            padding: 20px;
-            margin: 20px auto; /* Center the section */
-            width: 80%; /* Make it 80% of the page width */
-        }
-
-        /* Styling for the footer */
-        footer {
-            text-align: center;
-            padding: 10px;
-            /* Fix the footer at the bottom */
-            position: absolute;
-            bottom: 0;
-            width: 100%; /* Full width footer */
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
-        }
-
-        footer p {
-            margin: 0;
-            color: green; /* Green text */
-        }
-    </style>
-</head>
-
-
-
-<body>
-    <!-- Matrix background effect container -->
-    <div class="matrix-bg">
-        <!-- Header Section -->
-        <header>
-            <!-- The main title of the page -->
-            <h1>Welcome to My World - Cloud Threat Hunting</h1>
-        </header>
-
-        <!-- Main Content Section -->
-        <main>
-            <!-- Content area where you can put different page info -->
-            <section id="content-section">
-                <h2>Page Content</h2>
-                <p>This is a basic template for your pages. Customize the content here as per the page.</p>
-            </section>
-        </main>
-
-        <!-- Footer Section -->
-        <footer>
-            <p>&copy; 2024 Welcome To My World</p>
-        </footer>
-    </div>
-
-
-
-
-
-    <!-- Matrix Effect Script (JS to create the Matrix animation) -->
-    <script>
-        // Create a canvas element to draw the Matrix effect
-        const canvas = document.createElement('canvas'); // Create a new canvas
-        document.querySelector('.matrix-bg').appendChild(canvas); // Add it to the matrix background div
-        const ctx = canvas.getContext('2d'); // Get the 2D drawing context
-
-        // Set the canvas width and height to fill the window
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        // Define how many columns of falling text there will be
-        const columns = Math.floor(canvas.width / 20); // Each column is 20px wide
-        const drops = Array(columns).fill(0); // Create an array for each column, initialize to 0
-
-        // Function to draw the Matrix effect
-        function drawMatrixEffect() {
-            // Set a translucent black background to create the trailing effect
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Set the font color and size for the falling text
-            ctx.fillStyle = '#0f0';  // Green text, Matrix style
-            ctx.font = '16pt monospace'; // Monospace font for Matrix look
-
-            // Loop over each column to draw random characters
-            for (let i = 0; i < drops.length; i++) {
-                // Generate random characters from ASCII
-                const text = String.fromCharCode(Math.random() * 128);
-                ctx.fillText(text, i * 20, drops[i] * 20); // Draw the text at the right position
-
-                // Reset drop position if it reaches the bottom or randomly resets
-                if (drops[i] * 20 > canvas.height && Math.random() > 0.95) {
-                    drops[i] = 0; // Reset drop to start at the top again
-                }
-
-                // Move the drop down by one unit (20px)
-                drops[i]++;
+        /* Keyframes for the spin animation */
+        @keyframes spin {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg); /* Use rotate for a 2D spin */
             }
         }
 
-        // Call the drawMatrixEffect function every 50 milliseconds to update the animation
-        setInterval(drawMatrixEffect, 50);
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+            #matrix {
+                width: 100vw; /* Ensure the canvas covers the full viewport width */
+                height: 100vh; /* Ensure the canvas covers the full viewport height */
+            }
+            header h1 {
+                font-size: 2em; /* Adjust font size for smaller screens */
+                animation: spin 15s linear infinite; /* Slower spin animation on mobile */
+            }
+        }
+
+        /* Navigation styles */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em; /* Adjust size as needed */
+            display: inline-block;
+            animation: fadeInOut 3s linear infinite;
+        }
+
+        /* Keyframes for fading in and out */
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Section styles */
+        section {
+            padding: 20px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Blog container */
+        #blog {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Blog posts container */
+        .blog-posts {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            overflow-y: hidden; /* Hide vertical scrolling */
+            max-height: 600px;
+            scroll-snap-type: x mandatory; /* Horizontal snap type */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling for touch devices */
+        }
+
+        /* Individual blog post */
+        .blog-post {
+            flex: 0 0 auto;
+            box-sizing: border-box;
+            padding: 20px;
+            scroll-snap-align: start; /* Snap alignment */
+            background-color: #444;
+            margin-right: 10px;
+            border-radius: 10px;
+            max-width: 300px;
+            max-height: 100%;
+            overflow-y: auto; /* Enable vertical scrolling within each post if needed */
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: left;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        form label {
+            margin-top: 10px;
+        }
+        form input, form textarea, form button {
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #0F0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Matrix Effect Canvas -->
+    <canvas id="matrix"></canvas>
+
+    <div class="content">
+        <!-- Your other content here -->
+    </div>
+
+    <!-- Matrix effect canvas -->
+    <canvas id="matrix"></canvas>
+    <div class="content">
+        <header>
+            <h1>Welcome To My World</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                     <li><a href="#threat-map">ThreatMap</a></li>
+                    <li><a href="#news-feed">Cyber</a></li>
+                    <li><a href="#threat-intelligence">ThreatIntel</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Home section -->
+        <section id="home">
+            <h2>Home</h2>
+            <p>Don't worry about who I am. I'm just here to help.</p>
+        </section>
+        <section id="blog">
+            <h2>Blog</h2>
+            <div class="blog-posts">
+                <div class="blog-post">
+                    <p>September 2024</p>
+                    <h3>Welcome to My World: Building a Cybersecurity Community</h3>
+                    <p>Welcome to the very first post on <strong>"Welcome to My World"</strong>, a place where cybersecurity enthusiasts, learners, and professionals come together to share knowledge, grow, and support each other. Whether you’re new to cybersecurity or have years of experience under your belt, this blog is designed to help you navigate the ever-evolving landscape of security threats and defense strategies.</p>
+                    <p><strong>Why Cybersecurity?</strong><br>
+                    Cybersecurity isn’t just about protecting data; it’s about safeguarding our digital lives. From personal information to corporate secrets, everything is vulnerable without the right defenses. That’s why I'm passionate about growing this space — to create a community where we can learn together, exchange ideas, and empower each other to become better defenders of the digital world.</p>
+                    <p><strong>What to Expect</strong><br>
+                    In this blog, I’ll cover a variety of topics ranging from threat hunting to vulnerability management, cloud security, and beyond. Here are a few things you can look forward to:
+                    <ul>
+                        <li>Latest Threat Intelligence: Stay updated on emerging cybersecurity threats and how to mitigate them.</li>
+                        <li>How Society Today, Shapes Cybersecurity For The Future: The world is transitioning into a digital realm, new societal norms are emerging. I’ll explore how society and cybersecurity influence one another and shape our future.</li>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+
+
+    <!-- Matrix effect script -->
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@##$%^&&*()+=?';
+        const charArray = characters.split('');
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0';
+            ctx.font = `${fontSize}px monospace`;
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 30);
+        window.onresize = function () {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
     </script>
 
-
-
+</body>
+</html>
 
 </body>
 </html>
